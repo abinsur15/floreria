@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% load pwa %}
+  {% progressive_web_app_meta %}
+
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js"></script>
+
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyBkv9rff7oJk5O0mSVV3Bu4GO0ppObR5_c",
+      authDomain: "floreria-6289c.firebaseapp.com",
+      databaseURL: "https://floreria-6289c.firebaseio.com",
+      projectId: "floreria-6289c",
+      storageBucket: "floreria-6289c.appspot.com",
+      messagingSenderId: "325885603760",
+      appId: "1:325885603760:web:51912bbde164fd917ab075"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    let messaging = firebase.messaging();
+
+      navigator.serviceWorker
+      .register('./serviceworker.js')
+      .then(function(register) {
+
+        messaging.useServiceWorker(register);
+
+        messaging.requestPermission()
+          .then(function() {
+            console.log("El usuario ha aceptado recibir notificaciones")
+
+            return messaging.getToken();
+          })
+          .then(function(token){
+            console.log(token);
+
+            fetch('guardar_token/',{
+              method:'post',
+              headers:{
+                'Content-Type':'application/json',
+                'Accept':'application/json'
+              },
+              body:JSON.stringify({
+                'token':token
+              })
+            })
+            .then(function(resultado){
+              console.log("Se ha guardado el token")
+            })
+            .catch(function(e){
+              console.log("No se ha podido guardar el token")
+            })
+          })
+          .catch(function(e) {
+            console.log("El usuario no ha aceptado tener notificaciones")
+          })
+
+      })
+
+      messaging.onMessage(function(payload){
+
+        let title = 'titulo de la notifiacion';
+
+        let options = {
+          body:'Este Mensaje',
+          icon:'/static/img/logofloreria.png'
+        }
+
+        let mensaje = new Notification(title, options);
+
+
+
+
+
+      })
+
+      </script>
+
+
+  <title>
+    {% block Titulo %}
+
+    {% endblock Titulo %}
+
+  </title>
+
+
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-success">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="container">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active text-white" href="{% url 'INICIO' %}">Inicio <span
+              class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link text-white" href="{% url 'GALERIA' %}">Galeria</a>
+          <a class="nav-item nav-link text-white" href="{% url 'INGRESAR' %}">Ingresar Producto</a>
+          <a class="nav-item nav-link text-white" href="{% url 'CARRITO' %}">Carrito</a>
+          {% if user.is_authenticated%}
+          <a class="nav-item nav-link text-white" href=#> Usuario:{{ user.username }}</a>
+          <a class="nav-item nav-link text-white" href="{% url 'logout' %}">Cerrar Sesion</a>
+          {% else %}
+          <a class="nav-item nav-link text-white" href="{% url 'login' %}">Iniciar Sesión</a>
+          <a class="nav-item nav-link text-white" href="{% url 'registro_usuario' %}">Registrarse</a>
+          {% endif %}
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  {% block Contenido %}
+
+
+
+  {% endblock Contenido %}
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+{% extends "core/base.html" %}
+
+{% block Titulo %}
+Galeria
+{% endblock Titulo %}
+
+{% load static %}
+
+{% block Contenido %}
+
+<div class ="display-4 text-center mt-5">Productos disponibles</div>
+
+<div class="container">
+    <div class="card mt-5" style="width: 18rem;">
+        <img src="{% static 'img/flores1.jpg' %}" class="card-img-top" alt="flores1">
+        <div class="card-body">
+          <h5 class="card-title">Florero pequeño con flores surtidas de la temporada</h5>
+          <p class="card-text">$22.000</p>
+          <a href="#" class="btn btn-danger">Añadir a carrito</a>
+        </div>
+      </div>
+</div>
+    
+{% endblock Contenido %}

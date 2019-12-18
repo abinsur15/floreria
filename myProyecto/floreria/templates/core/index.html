@@ -1,0 +1,73 @@
+{% extends "core/base.html" %}
+
+{% block Titulo %}
+Inicio
+{% endblock Titulo %}
+
+{% load static %}
+
+{% block Contenido %}
+
+<img class="rounded mx-auto d-block mt-3 img-fluid" src="{% static 'img/logofloreria.png' %}" alt="logofloreria"
+  style="width: 700px; height: 300px;">
+
+
+
+<div class="container">
+<div id="carouselExampleIndicators" class="carousel slide carousel-fade mt-5 p-1" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'img/floreriainicio1.jpg' %}" class="d-block w-100" alt="inicio1">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/floreriainicio2.jpg' %}" class="d-block w-100" alt="inicio2">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/floreriainicio3.jpg' %}" class="d-block w-100" alt="inicio3">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Anterior</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Siguiente</span>
+  </a>
+</div>
+</div>
+
+
+<h3 class="text-center mt-5 display-4">La floreria de los chilenos</h3>
+<h1 class="mt-5 text-center"></h1>
+
+<div class="container">
+  <p class="mt-5 text-center-justify"><em>Somos una florería especializada en el reparto de flores a domicilio en Santiago con más de 10 años de experiencia. Realizamos envíos de todo tipo de flores como rosas, tulipanes, gerberas, lilium, girasoles, flores silvestres y mix florales. Contamos con diseños en floreros, ramos, cajas, canastos en mimbre y brindamos servicio dedecoración de iglesias y eventos. Consulta por nuestros productos</em></p>
+
+  <h3 class="mt-5 display-3 text-center"> Ubicación </h3>
+  <iframe class="mt-5" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3330.8988472041483!2d-70.74808838470467!3d-33.39980310230108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662c1eff08ca041%3A0xfa1a2af462b78e28!2sFlorer%C3%ADa%20P%C3%A9talos%20y%20Hojas!5e0!3m2!1ses!2scl!4v1576611350526!5m2!1ses!2scl" width="500" height="350" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+  <img src="{% static 'img/fachada.png' %}"  class="rounded float-right mt-5 img-fluid" alt="fachada" style="width: 500px; height: 350px;">
+  <h3 class="mt-5 display-3 text-center"> Contacto </h3>
+  <div class="row">
+    <img src="{% static 'img/facebook.png' %}" alt="facebook" style="width: 45px; height: 45px;" class="mt-5">
+    <h5 class="mt-5 col-sm-2 lead">Florería Pétalos</h5>
+    <img src="{% static 'img/instagram.png' %}" alt="instagram" style="width: 45px; height: 45px;" class="mt-5">
+    <h5 class="mt-5 col-sm-2 lead">@FloreríaPétalos</h5>
+    <img src="{% static 'img/whatsapp.png' %}" alt="whatsapp" style="width: 45px; height: 45px;" class="mt-5">
+    <h5 class="mt-5 col-sm-2 lead">+56977051323</h5>
+    <img src="{% static 'img/sobre.png' %}" alt="mail" style="width: 45px; height: 45px;" class="mt-5">
+    <h5 class="mt-5 col-sm-2 lead">contacto@floreriapetalos.cl</h5>
+    
+
+  </div>
+
+</div>
+
+<h1 class="mt-5 text-center"></h1>
+
+{% endblock Contenido %}
